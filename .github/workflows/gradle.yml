@@ -14,8 +14,8 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
       - name: Start SUT
-        run: java -jar "artifacts/app-replan-delivery.jar" &
+        run: java -Dspring.profiles.active=test -jar "artifacts/app-ibank.jar" &
       - name: Wait for SUT
         run: sleep 10
       - name: Build and test
-        run: ./gradlew test
+        run: ./gradlew test -Dselenide.headless=true -Dchromeoptions.args="--no-sandbox,--disable-dev-shm-usage,--disable-gpu,--window-size=1280,720,--remote-allow-origins=*"
