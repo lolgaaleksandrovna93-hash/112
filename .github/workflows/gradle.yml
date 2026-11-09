@@ -9,12 +9,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '11'
           distribution: 'temurin'
       - name: Make gradlew executable
         run: chmod +x gradlew
       - name: Start SUT
-        run: java -jar "artifacts/app-ibank.jar" &
+        run: java -Dspring.profiles.active=test -jar "artifacts/app-ibank.jar" &
       - name: Wait for SUT
         run: sleep 10
       - name: Build and test
